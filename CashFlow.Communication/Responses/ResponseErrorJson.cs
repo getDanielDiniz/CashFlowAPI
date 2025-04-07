@@ -7,7 +7,7 @@ public class ResponseErrorJson
     {
         Errors = [error];
     }
-    public ResponseErrorJson( List<string> messageErrors)
+    public ResponseErrorJson(List<string> messageErrors)
     {
         Errors = messageErrors;
     }

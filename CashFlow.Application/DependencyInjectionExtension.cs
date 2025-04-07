@@ -5,6 +5,7 @@ using CashFlow.Application.UseCases.Expenses.Read.ReadById;
 using CashFlow.Application.UseCases.Expenses.Reports.Excel;
 using CashFlow.Application.UseCases.Expenses.Reports.PDF;
 using CashFlow.Application.UseCases.Expenses.Update;
+using CashFlow.Application.UseCases.Users.Create;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.Application;
@@ -18,6 +19,11 @@ public static class DependencyInjectionExtension
 
     private static void AddUsecases(IServiceCollection services)
     {
+        //User Use Cases
+
+        services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+
+        //Expense Use Cases
         services.AddScoped<ICreateExpense, CreateExpense>();
         services.AddScoped<IReadAllExpenses, ReadAllExpenses>();
         services.AddScoped<IReadById, ReadById>();

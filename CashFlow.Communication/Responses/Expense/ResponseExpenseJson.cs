@@ -1,6 +1,6 @@
 ﻿using CashFlow.Communication.Types.PaymentType;
 
-namespace CashFlow.Communication.Responses;
+namespace CashFlow.Communication.Responses.Expense;
 public class ResponseExpenseJson
 {
     public int Id { get; set; }

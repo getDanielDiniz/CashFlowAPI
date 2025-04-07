@@ -4,6 +4,7 @@ using CashFlow.API.Filters;
 using CashFlow.API.Middleware;
 using CashFlow.Application;
 using CashFlow.Infraestructure.DataAccess;
+using CashFlow.Infraestructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,4 +35,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await UpdateDatabase();
+
 app.Run();
+
+async Task UpdateDatabase()
+{
+    var service = app.Services.CreateAsyncScope().ServiceProvider;
+
+    await service.UpdateDatabase();
+}
