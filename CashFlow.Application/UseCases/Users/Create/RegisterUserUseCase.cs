@@ -17,16 +17,19 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IPasswordCriptography _passwordCriptography;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IReadOnlyUserRespository _readOnlyUserRespository;
+    private readonly IJWTGenerator _JWTGenerator;
 
     public RegisterUserUseCase(IWriteOnlyUserRepository repository,
         IMapper mapper, IPasswordCriptography passwordCriptography,
-        IUnitOfWork unitOfWork, IReadOnlyUserRespository readOnlyUserRespository)
+        IUnitOfWork unitOfWork, IReadOnlyUserRespository readOnlyUserRespository,
+        IJWTGenerator JWTGenerator)
     {
         _mapper = mapper;
         _repository = repository;
         _passwordCriptography = passwordCriptography;
         _unitOfWork = unitOfWork;
         _readOnlyUserRespository = readOnlyUserRespository;
+        _JWTGenerator = JWTGenerator;
     }
 
     public async Task<ResponseUserRegistered> Execute(RequestRegisterUser newUser)
@@ -39,9 +42,10 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         user.UserIdentifier = Guid.NewGuid();
 
         await _repository.RegisterUser(user);
-        await _unitOfWork.Commit();
+        string token = _JWTGenerator.GenerateJWTToken(user);
 
-        return new ResponseUserRegistered(email: user.Email);
+        await _unitOfWork.Commit();
+        return new ResponseUserRegistered(email: user.Email, token);
 
     }
 

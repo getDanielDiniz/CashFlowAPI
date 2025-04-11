@@ -7,6 +7,7 @@ using CashFlow.Infraestructure.Security.Criptography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CashFlow.Infraestructure.Security.JWT;
 
 namespace CashFlow.Infraestructure.DataAccess;
 public static class DependencyInjectionExtension
@@ -15,6 +16,7 @@ public static class DependencyInjectionExtension
     {
         AddDbContext(services, configuration);
         AddRepositories(services);
+        AddTokenGenerator(services,configuration);
     }
 
     private static void AddRepositories(IServiceCollection services)
@@ -38,5 +40,10 @@ public static class DependencyInjectionExtension
         string connectionString = configuration.GetConnectionString("MySqlConnection");
         var serverVersion = ServerVersion.AutoDetect(connectionString);
         services.AddDbContext<CashFlowDbContext>(confg => confg.UseMySql(connectionString,serverVersion) );
+    }
+
+    private static void AddTokenGenerator(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped<IJWTGenerator> (provider => new JWTGenerator(configuration));
     }
 }
