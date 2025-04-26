@@ -138,4 +138,7 @@ Password must have at least:
 - One Number 
 - One Symbol ( !  @  #  $  .  {  } )</value>
   </data>
+  <data name="UNAUTHORIZED" xml:space="preserve">
+    <value>Invalid email or password!</value>
+  </data>
 </root>

@@ -2,4 +2,6 @@
 public interface IPasswordCriptography
 {
     string Encrypt(string password);
+
+    bool IsPasswordMatch (string password, string hash);
 }

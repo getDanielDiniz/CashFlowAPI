@@ -110,5 +110,14 @@ namespace CashFlow.Exception.Resource {
                 return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid email or password!.
+        /// </summary>
+        public static string UNAUTHORIZED {
+            get {
+                return ResourceManager.GetString("UNAUTHORIZED", resourceCulture);
+            }
+        }
     }
 }

@@ -8,4 +8,8 @@ internal class Criptography : IPasswordCriptography
         return BC.HashPassword(password);
     }
 
+    public bool IsPasswordMatch(string password, string hash)
+    {
+        return BC.Verify(password,hash);
+    }
 }

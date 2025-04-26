@@ -18,4 +18,5 @@ public class UserController : ControllerBase
         ResponseUserRegistered RegisteredUser = await RegisterUser.Execute(newUser);
         return Created(string.Empty, RegisteredUser);
     }
+
 }

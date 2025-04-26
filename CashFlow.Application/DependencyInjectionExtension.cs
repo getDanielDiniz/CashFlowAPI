@@ -6,6 +6,7 @@ using CashFlow.Application.UseCases.Expenses.Reports.Excel;
 using CashFlow.Application.UseCases.Expenses.Reports.PDF;
 using CashFlow.Application.UseCases.Expenses.Update;
 using CashFlow.Application.UseCases.Users.Create;
+using CashFlow.Application.UseCases.Users.Login;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CashFlow.Application;
@@ -22,6 +23,7 @@ public static class DependencyInjectionExtension
         //User Use Cases
 
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        services.AddScoped<ILoginUseCase, LoginUseCase>();
 
         //Expense Use Cases
         services.AddScoped<ICreateExpense, CreateExpense>();
